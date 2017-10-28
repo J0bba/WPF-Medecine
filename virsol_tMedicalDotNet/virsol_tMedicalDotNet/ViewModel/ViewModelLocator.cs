@@ -12,6 +12,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using System;
 using virsol_tMedicalDotNet.Model;
 
 namespace virsol_tMedicalDotNet.ViewModel
@@ -39,7 +40,9 @@ namespace virsol_tMedicalDotNet.ViewModel
             }
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
         }
+
 
         /// <summary>
         /// Gets the Main property.
@@ -47,11 +50,20 @@ namespace virsol_tMedicalDotNet.ViewModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
-        public MainViewModel Main
+
+        public MainViewModel MainView
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+
+        public LoginViewModel LoginView
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LoginViewModel>();
             }
         }
 

@@ -1,0 +1,31 @@
+﻿<Window x:Class="virsol_tMedicalDotNet.View.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        mc:Ignorable="d ignore"
+        Height="453.308"
+        Width="598.881"
+        Title="MedicalDotNet"
+        DataContext="{Binding LoginView, Source={StaticResource Locator}}">
+
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="RootLayout">
+        <Label Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="278,22,274.8,0"/>
+        <Label Content="Login :" HorizontalAlignment="Left" Margin="76,70,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="162,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path=Login,UpdateSourceTrigger=Default, Mode=TwoWay}"/>
+        <Label Content="Password :" HorizontalAlignment="Left" Margin="76,112,0,0" VerticalAlignment="Top"/>
+        <PasswordBox Name="MyPasswordBox" HorizontalAlignment="Left" Margin="162,112,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+        <Button Content="Connect" HorizontalAlignment="Left" Margin="392,159,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=MyPasswordBox}"/>
+
+    </Grid>
+</Window>

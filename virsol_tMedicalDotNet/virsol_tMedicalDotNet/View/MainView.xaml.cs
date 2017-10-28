@@ -6,14 +6,14 @@ namespace virsol_tMedicalDotNet
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainView : Window
     {
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
         /// </summary>
-        public MainWindow()
+        public MainView()
         {
-            InitializeComponent();
+            //InitializeComponent();
             Closing += (s, e) => ViewModelLocator.Cleanup();
         }
     }
