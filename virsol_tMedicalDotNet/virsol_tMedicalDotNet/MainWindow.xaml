@@ -7,7 +7,7 @@
         mc:Ignorable="d ignore"
         Height="300"
         Width="300"
-        Title="MVVM Light Application"
+        Title="MedicalDotNet"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     
     <Window.Resources>
