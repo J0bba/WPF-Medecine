@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "virsol_tMedicalDotNet", "virsol_tMedicalDotNet\virsol_tMedicalDotNet.csproj", "{032C2485-8C1D-45BD-8940-E606B5FD8E63}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{032C2485-8C1D-45BD-8940-E606B5FD8E63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{032C2485-8C1D-45BD-8940-E606B5FD8E63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{032C2485-8C1D-45BD-8940-E606B5FD8E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{032C2485-8C1D-45BD-8940-E606B5FD8E63}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8B45115-5591-41E0-B296-BADC09D61FD9}
+	EndGlobalSection
+EndGlobal
