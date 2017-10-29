@@ -97,7 +97,10 @@
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
+    <Compile Include="Model\Observation.cs" />
+    <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Services\Patients.cs" />
     <Compile Include="Services\Users.cs" />
     <Compile Include="ViewModel\NewUserViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

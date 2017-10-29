@@ -17,6 +17,47 @@ namespace virsol_tMedicalDotNet.ViewModel
     {
 
         #region Variables
+        private Patient _selectedPatient;
+        public Patient SelectedPatient
+        {
+            get
+            {
+                return _selectedPatient;
+            }
+            set
+            {
+                _selectedPatient = value;
+                SelectedObservation = _selectedPatient.observations.First();
+                RaisePropertyChanged("SelectedPatient");
+            }
+        }
+        private Observation _selectedObservation;
+        public Observation SelectedObservation {
+            get
+            {
+                return _selectedObservation;
+            }
+            set
+            {
+                _selectedObservation = value;
+                RaisePropertyChanged("SelectedObservation");
+            }
+        }
+
+        private ObservableCollection<Patient> _patientList;
+        public ObservableCollection<Patient> PatientList
+        {
+            get
+            {
+                return _patientList;
+            }
+            set
+            {
+                _patientList = value;
+                RaisePropertyChanged("PatientList");
+            }
+        }
+
         private Visibility _isNotInfirmiere;
         public Visibility isNotInfirmiere {
             get
@@ -30,6 +71,7 @@ namespace virsol_tMedicalDotNet.ViewModel
             }
         }
         private BackgroundWorker _worker = new BackgroundWorker();
+        private BackgroundWorker _workerPatients = new BackgroundWorker();
         public string CurrUserLogin { get; set; }
         public User CurrUser { get; set; }
 
@@ -87,10 +129,16 @@ namespace virsol_tMedicalDotNet.ViewModel
             _worker.DoWork += new DoWorkEventHandler((s, e) =>
             {
                 ListUsers = Users.GetAllUsers();
-                CurrUser = Users.GetUser(CurrUserLogin);
+                //CurrUser = Users.GetUser(CurrUserLogin);
                 setVisibility(CurrUserLogin);
             });
             _worker.RunWorkerAsync();
+            _workerPatients.DoWork += new DoWorkEventHandler((s, e) =>
+            {
+                PatientList = Patients.GetAllPatients();
+                
+            });
+            _workerPatients.RunWorkerAsync();
         }
 
         #region Methods

@@ -59,11 +59,6 @@ namespace virsol_tMedicalDotNet.ViewModel
             };
             if (Users.CreateUser(newUser))
             {
-                for (int i = 0; i < 50; i++)
-                {
-                    newUser.login += "a";
-                    Users.CreateUser(newUser);
-                }
                 lastWindow.ListUsers.Add(newUser);
                 lastWindow.SelectedUser = newUser;
                 CloseCurrentWindow();

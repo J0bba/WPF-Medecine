@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
-        Height="600"
-        Width="800"
+        Height="720"
+        Width="1280"
         Title="Home"
         DataContext="{Binding MainView, Source={StaticResource Locator}}">
 
@@ -31,7 +31,7 @@
                              SelectedItem="{Binding Path=SelectedUser, Mode=TwoWay}"
                              DisplayMemberPath="prettyname"
                              SelectedIndex="0"/>
-                    <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Supprimer" HorizontalAlignment="Left" Margin="699,0,0,-0.4" VerticalAlignment="Bottom" Width="75" Command="{Binding DeleteUserCommand}"/>
+                    <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Supprimer" HorizontalAlignment="Center" Margin="50,0,-150,50" VerticalAlignment="Bottom" Width="75" Command="{Binding DeleteUserCommand}"/>
                     <Label Content="Name :" HorizontalAlignment="Left" Margin="153,24,0,0" VerticalAlignment="Top"/>
                     <Label HorizontalAlignment="Left" Margin="232,26,0,0" Content="{Binding SelectedUser.name}" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Firstname :" HorizontalAlignment="Left" Margin="153,75,0,0" VerticalAlignment="Top"/>
@@ -42,11 +42,62 @@
                     <Image HorizontalAlignment="Left" Height="100" Margin="252,171,0,0" VerticalAlignment="Top" Width="100" Source="{Binding SelectedUser.picture}"/>
                     <Label Content="Login :" HorizontalAlignment="Left" Margin="393,26,0,0" VerticalAlignment="Top"/>
                     <Label HorizontalAlignment="Left" Margin="472,26,0,0" Content="{Binding SelectedUser.login}" VerticalAlignment="Top" Width="120"/>
-                    <Button Visibility="{Binding isNotInfirmiere}" Content="Nouvel utilisateur" HorizontalAlignment="Left" Margin="588,0,0,-0.4" VerticalAlignment="Bottom" Width="Auto" Command="{Binding NewUserCommand}"/>
+                    <Button Visibility="{Binding isNotInfirmiere}" Content="Nouvel utilisateur" HorizontalAlignment="Center" Margin="0,0,10,50" VerticalAlignment="Bottom" Width="Auto" Command="{Binding NewUserCommand}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Patients">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Grid.Row="0" Grid.Column ="0" Width="151" MaxWidth="150" MinWidth="50" HorizontalAlignment="Left" 
+                             ItemsSource="{Binding Path=PatientList}" 
+                             SelectedItem="{Binding Path=SelectedPatient, Mode=TwoWay}"
+                             DisplayMemberPath="prettyname"
+                             SelectedIndex="0" Margin="0,0,0,-0.4"/>
+                    <ListBox HorizontalAlignment="Left" Height="Auto" MinHeight="20" Margin="175,64,0,0" VerticalAlignment="Top" MinWidth="50" Width="Auto" MaxWidth="110" 
+                             ItemsSource="{Binding SelectedPatient.observations}"
+                             SelectedItem="{Binding SelectedObservation}"
+                             DisplayMemberPath="prettyname"
+                             SelectedIndex="0"/>
+                    <Label Content="Observations :" HorizontalAlignment="Left" Margin="175,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.652,1.52" Height="26" Width="90"/>
+                    <Label Content="Date de naissance : " HorizontalAlignment="Left" Margin="175,10,0,0" VerticalAlignment="Top"/>
+                    <Label Content="{Binding Path=SelectedPatient.prettybirthdate}" HorizontalAlignment="Left" Margin="295,10,0,0" VerticalAlignment="Top"/>
+                    <Border Name="BlackBorder" Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="295,64,0,0">
+                        <Grid>
+                            <Label Content="Poids : " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                            <Label Content="{Binding SelectedObservation.prettyweight}" HorizontalAlignment="Left" Margin="56,10,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Pression sanguine : " HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+                            <Label Content="{Binding SelectedObservation.bloodPressure}" HorizontalAlignment="Left" Margin="128,36,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Commentaire :" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+                            <ScrollViewer Height="Auto" MaxHeight="200"  Margin="16,98,0,0" VerticalAlignment="Top" Width="410" HorizontalAlignment="Left">
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SelectedObservation.comment}" VerticalAlignment="Top" Height="Auto" Width="410" MaxWidth="410"/>
+                            </ScrollViewer>
+                            <Label Content="Prescriptions :" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top"/>
+                            <ScrollViewer Height="Auto" MaxHeight="120"  Margin="16,338,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="410">
+                                <ListBox HorizontalAlignment="Left" ItemsSource="{Binding SelectedObservation.prescription}" VerticalAlignment="Top" Height="Auto" Width="390" MaxWidth="390"/>
+                            </ScrollViewer>
+                            <Label Content="Images : " HorizontalAlignment="Left" Margin="551,11,0,0" VerticalAlignment="Top"/>
+                            <ListView HorizontalAlignment="Left" Height="Auto" Margin="551,42,0,0" VerticalAlignment="Top" ItemsSource="{Binding SelectedObservation.pictures}">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Image Source="{Binding}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                    </Border>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
