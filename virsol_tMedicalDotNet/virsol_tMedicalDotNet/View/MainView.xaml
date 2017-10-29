@@ -31,19 +31,18 @@
                              SelectedItem="{Binding Path=SelectedUser, Mode=TwoWay}"
                              DisplayMemberPath="prettyname"
                              SelectedIndex="0"/>
-                    <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Sauvegarder" HorizontalAlignment="Left" Margin="703,513,0,0" VerticalAlignment="Bottom" Width="75"/>
-                    <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Supprimer" HorizontalAlignment="Left" Margin="599,512,0,0" VerticalAlignment="Bottom" Width="75"/>
+                    <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Supprimer" HorizontalAlignment="Left" Margin="699,0,0,-0.4" VerticalAlignment="Bottom" Width="75" Command="{Binding DeleteUserCommand}"/>
                     <Label Content="Name :" HorizontalAlignment="Left" Margin="153,24,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="232,28,0,0" TextWrapping="Wrap" Text="{Binding SelectedUser.name}" VerticalAlignment="Top" Width="120"/>
+                    <Label HorizontalAlignment="Left" Margin="232,26,0,0" Content="{Binding SelectedUser.name}" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Firstname :" HorizontalAlignment="Left" Margin="153,75,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="232,78,0,0" TextWrapping="Wrap" Text="{Binding SelectedUser.firstname}" VerticalAlignment="Top" Width="120"/>
+                    <Label HorizontalAlignment="Left" Margin="232,76,0,0" Content="{Binding SelectedUser.firstname}" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Role :" HorizontalAlignment="Left" Margin="153,122,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="232,126,0,0" TextWrapping="Wrap" Text="{Binding SelectedUser.role}" VerticalAlignment="Top" Width="120"/>
+                    <Label HorizontalAlignment="Left" Margin="232,124,0,0" Content="{Binding SelectedUser.role}" VerticalAlignment="Top" Width="120"/>
                     <Label Content="Picture :" HorizontalAlignment="Left" Margin="153,171,0,0" VerticalAlignment="Top"/>
                     <Image HorizontalAlignment="Left" Height="100" Margin="252,171,0,0" VerticalAlignment="Top" Width="100" Source="{Binding SelectedUser.picture}"/>
-                    <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Modifier l'image" HorizontalAlignment="Left" Margin="153,284,0,0" VerticalAlignment="Top" Width="94" Height="24"/>
                     <Label Content="Login :" HorizontalAlignment="Left" Margin="393,26,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="472,30,0,0" TextWrapping="Wrap" Text="{Binding SelectedUser.login}" VerticalAlignment="Top" Width="120"/>
+                    <Label HorizontalAlignment="Left" Margin="472,26,0,0" Content="{Binding SelectedUser.login}" VerticalAlignment="Top" Width="120"/>
+                    <Button Visibility="{Binding isNotInfirmiere}" Content="Nouvel utilisateur" HorizontalAlignment="Left" Margin="588,0,0,-0.4" VerticalAlignment="Bottom" Width="Auto" Command="{Binding NewUserCommand}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Patients">

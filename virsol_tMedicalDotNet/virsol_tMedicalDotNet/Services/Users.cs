@@ -11,6 +11,27 @@ namespace virsol_tMedicalDotNet.Services
 {
     class Users
     {
+        public static bool CreateUser(Model.User user)
+        {
+            ServiceUserClient serviceUser = new ServiceUserClient();
+            bool result = false;
+            try
+            {
+                result = serviceUser.AddUser(new ServiceUser.User()
+                {
+                    Login = user.login,
+                    Pwd = user.pwd,
+                    Name = user.name,
+                    Firstname = user.firstname,
+                    Picture = user.picture,
+                    Role = user.role
+                });
+            }
+            catch (Exception) { }
+            finally { serviceUser.Close(); }
+            return result;
+        }
+
         public static string GetRole(string login)
         {
             ServiceUserClient serviceUser = new ServiceUserClient();
@@ -37,6 +58,8 @@ namespace virsol_tMedicalDotNet.Services
                 user.name = userS.Name;
                 user.picture = userS.Picture;
                 user.firstname = userS.Firstname;
+                serviceUser.Close();
+                return user;
 
             }
             catch (Exception) { }
@@ -70,6 +93,22 @@ namespace virsol_tMedicalDotNet.Services
             catch (Exception) { }
             finally { serviceUser.Close(); }
             return result;
+        }
+
+        public static bool DeleteUser(string login)
+        {
+            ServiceUserClient serviceUser = new ServiceUserClient();
+            bool response = false;
+            try
+            {
+                response = serviceUser.DeleteUser(login);
+            }
+            catch (Exception) { }
+            finally
+            {
+                serviceUser.Close();
+            }
+            return response;
         }
     }
 }
