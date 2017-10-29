@@ -11,26 +11,64 @@ namespace virsol_tMedicalDotNet.Services
 {
     class Users
     {
+        public static string GetRole(string login)
+        {
+            ServiceUserClient serviceUser = new ServiceUserClient();
+            string role = "";
+            try
+            {
+                role = serviceUser.GetRole(login);
+            }
+            catch (Exception) { }
+            finally { serviceUser.Close(); }
+            return role;
+        }
+
+        public static Model.User GetUser(string login)
+        {
+            Model.User user = new Model.User();
+            ServiceUserClient serviceUser = new ServiceUserClient();
+            try
+            {
+                var userS = serviceUser.GetUser(login);
+                user.login = userS.Login;
+                user.pwd = userS.Pwd;
+                user.role = userS.Role;
+                user.name = userS.Name;
+                user.picture = userS.Picture;
+                user.firstname = userS.Firstname;
+
+            }
+            catch (Exception) { }
+            finally { serviceUser.Close(); }
+            return user;
+
+        }
+
         public static ObservableCollection<Model.User> GetAllUsers()
         {
             ObservableCollection<Model.User> result = new ObservableCollection<Model.User>();
             ServiceUserClient serviceUser = new ServiceUserClient();
-            var users = serviceUser.GetListUser();
-            foreach (var user in users)
+            try
             {
-                Model.User Muser = new Model.User()
+                var users = serviceUser.GetListUser();
+                foreach (var user in users)
                 {
-                    login = user.Login,
-                    pwd = user.Pwd,
-                    name = user.Name,
-                    firstname = user.Firstname,
-                    picture = user.Picture,
-                    connected = user.Connected,
-                    role = user.Role
-                };
-                result.Add(Muser);
+                    Model.User Muser = new Model.User()
+                    {
+                        login = user.Login,
+                        pwd = user.Pwd,
+                        name = user.Name,
+                        firstname = user.Firstname,
+                        picture = user.Picture,
+                        connected = user.Connected,
+                        role = user.Role
+                    };
+                    result.Add(Muser);
+                }
             }
-            serviceUser.Close();
+            catch (Exception) { }
+            finally { serviceUser.Close(); }
             return result;
         }
     }

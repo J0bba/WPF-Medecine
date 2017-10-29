@@ -16,5 +16,10 @@ namespace virsol_tMedicalDotNet.Model
         public Byte[] picture { get; set; }
         public string role { get; set; }
         public bool connected { get; set; }
+
+        public string prettyname { get
+            {
+                return firstname + " " + name;
+            } }
     }
 }

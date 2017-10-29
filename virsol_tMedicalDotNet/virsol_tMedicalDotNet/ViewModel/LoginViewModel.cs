@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using virsol_tMedicalDotNet.View;
 
 namespace virsol_tMedicalDotNet.ViewModel
 {
@@ -37,14 +38,25 @@ namespace virsol_tMedicalDotNet.ViewModel
             System.Console.WriteLine(_login);
             string pwd = PasswordBox.Password;
             var serviceUser = new ServiceUser.ServiceUserClient();
-            if (serviceUser.Connect(login, pwd))
+            try
             {
-                OpenHomeWindow(login);
+                if (serviceUser.Connect(login, pwd))
+                {
+                    OpenHomeWindow(login);
+                }
+                else
+                {
+                    // SHOW DIALOG BOX
+                    MessageBox.Show("Wrong login/password");
+                }
             }
-            else
+            catch (System.ServiceModel.EndpointNotFoundException)
             {
-                // SHOW DIALOG BOX
-                MessageBox.Show("Wrong login/password");
+
+            }
+            finally
+            {
+                serviceUser.Close();
             }
         }
 

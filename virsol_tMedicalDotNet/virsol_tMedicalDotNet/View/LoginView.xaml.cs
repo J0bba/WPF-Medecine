@@ -21,12 +21,6 @@ namespace virsol_tMedicalDotNet
 
         private void NotificationMessageReceived(NotificationMessage msg)
         {
-            System.Console.WriteLine(msg.Notification);
-            if (msg.Notification == "ShowMainView")
-            {
-                var view2 = new MainView();
-                view2.Show();
-            }
         }
     }
 }

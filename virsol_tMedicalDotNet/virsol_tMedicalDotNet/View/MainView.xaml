@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
-        Height="453.308"
-        Width="598.881"
+        Height="600"
+        Width="800"
         Title="Home"
         DataContext="{Binding MainView, Source={StaticResource Locator}}">
 
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,5 +20,35 @@
     </Window.Resources>
 
     <Grid x:Name="RootLayout">
+        <TabControl>
+            <TabItem Header="Utilisateurs">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Grid.Row="0" Grid.Column ="0" Width="Auto" MaxWidth="150" MinWidth="50" HorizontalAlignment="Left" 
+                             ItemsSource="{Binding Path=ListUsers}" 
+                             SelectedItem="{Binding Path=SelectedUser, Mode=TwoWay}"
+                             DisplayMemberPath="prettyname"
+                             SelectedIndex="0"/>
+                    <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Sauvegarder" HorizontalAlignment="Left" Margin="703,513,0,0" VerticalAlignment="Bottom" Width="75"/>
+                    <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Supprimer" HorizontalAlignment="Left" Margin="599,512,0,0" VerticalAlignment="Bottom" Width="75"/>
+                    <Label Content="Name :" HorizontalAlignment="Left" Margin="153,24,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="232,28,0,0" TextWrapping="Wrap" Text="{Binding SelectedUser.name}" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Firstname :" HorizontalAlignment="Left" Margin="153,75,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="232,78,0,0" TextWrapping="Wrap" Text="{Binding SelectedUser.firstname}" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Role :" HorizontalAlignment="Left" Margin="153,122,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="232,126,0,0" TextWrapping="Wrap" Text="{Binding SelectedUser.role}" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Picture :" HorizontalAlignment="Left" Margin="153,171,0,0" VerticalAlignment="Top"/>
+                    <Image HorizontalAlignment="Left" Height="100" Margin="252,171,0,0" VerticalAlignment="Top" Width="100" Source="{Binding SelectedUser.picture}"/>
+                    <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Modifier l'image" HorizontalAlignment="Left" Margin="153,284,0,0" VerticalAlignment="Top" Width="94" Height="24"/>
+                    <Label Content="Login :" HorizontalAlignment="Left" Margin="393,26,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="472,30,0,0" TextWrapping="Wrap" Text="{Binding SelectedUser.login}" VerticalAlignment="Top" Width="120"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Patients">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
