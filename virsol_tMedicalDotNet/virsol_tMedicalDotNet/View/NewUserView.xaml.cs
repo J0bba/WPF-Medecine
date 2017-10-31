@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using virsol_tMedicalDotNet.ViewModel;
 
 namespace virsol_tMedicalDotNet.View
 {
@@ -22,6 +24,7 @@ namespace virsol_tMedicalDotNet.View
         public NewUserView()
         {
             InitializeComponent();
+            Closing += ServiceLocator.Current.GetInstance<NewUserViewModel>().onClose;
         }
     }
 }

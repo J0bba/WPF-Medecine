@@ -58,7 +58,7 @@
                              SelectedItem="{Binding Path=SelectedPatient, Mode=TwoWay}"
                              DisplayMemberPath="prettyname"
                              SelectedIndex="0" Margin="0,0,0,-0.4"/>
-                    <ListBox HorizontalAlignment="Left" Height="Auto" MinHeight="20" Margin="175,64,0,0" VerticalAlignment="Top" MinWidth="50" Width="Auto" MaxWidth="110" 
+                    <ListBox HorizontalAlignment="Left" Height="Auto" MinHeight="20" Margin="175,64,0,0" VerticalAlignment="Top" MinWidth="110" Width="Auto" MaxWidth="110" 
                              ItemsSource="{Binding SelectedPatient.observations}"
                              SelectedItem="{Binding SelectedObservation}"
                              DisplayMemberPath="prettyname"
@@ -68,22 +68,22 @@
                     <Label Content="{Binding Path=SelectedPatient.prettybirthdate}" HorizontalAlignment="Left" Margin="295,10,0,0" VerticalAlignment="Top"/>
                     <Border Name="BlackBorder" Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="295,64,0,0">
                         <Grid>
-                            <Label Content="Poids : " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                            <Label Content="{Binding SelectedObservation.prettyweight}" HorizontalAlignment="Left" Margin="56,10,0,0" VerticalAlignment="Top"/>
-                            <Label Content="Pression sanguine : " HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
-                            <Label Content="{Binding SelectedObservation.bloodPressure}" HorizontalAlignment="Left" Margin="128,36,0,0" VerticalAlignment="Top"/>
-                            <Label Content="Commentaire :" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
-                            <ScrollViewer Height="Auto" MaxHeight="200"  Margin="16,98,0,0" VerticalAlignment="Top" Width="410" HorizontalAlignment="Left">
+                            <Label Visibility="{Binding IsObservationVisible}" Content="Poids : " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                            <Label Visibility="{Binding IsObservationVisible}" Content="{Binding SelectedObservation.prettyweight}" HorizontalAlignment="Left" Margin="56,10,0,0" VerticalAlignment="Top"/>
+                            <Label Visibility="{Binding IsObservationVisible}" Content="Pression sanguine : " HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+                            <Label Visibility="{Binding IsObservationVisible}" Content="{Binding SelectedObservation.bloodPressure}" HorizontalAlignment="Left" Margin="128,36,0,0" VerticalAlignment="Top"/>
+                            <Label Visibility="{Binding IsObservationVisible}" Content="Commentaire :" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+                            <ScrollViewer Visibility="{Binding IsObservationVisible}" Height="Auto" MaxHeight="200"  Margin="16,98,0,0" VerticalAlignment="Top" Width="410" HorizontalAlignment="Left">
                                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SelectedObservation.comment}" VerticalAlignment="Top" Height="Auto" Width="410" MaxWidth="410"/>
                             </ScrollViewer>
-                            <Label Content="Prescriptions :" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top"/>
-                            <ScrollViewer Height="Auto" MaxHeight="120"  Margin="16,338,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="410">
+                            <Label Visibility="{Binding IsObservationVisible}" Content="Prescriptions :" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top"/>
+                            <ScrollViewer Visibility="{Binding IsObservationVisible}" Height="Auto" MaxHeight="120"  Margin="16,338,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="410">
                                 <ListBox HorizontalAlignment="Left" ItemsSource="{Binding SelectedObservation.prescription}" VerticalAlignment="Top" MinHeight ="40" Height="Auto" Width="390" MaxWidth="390"/>
                             </ScrollViewer>
                             <Button Visibility="{Binding Path=isNotInfirmiere}" Margin="19,0,0,22.2" HorizontalAlignment="Left" Width="Auto" Content="Supprimer patient" Height="Auto" VerticalAlignment="Bottom" Command="{Binding DeletePatientCommand}"/>
-                            
-                            <Label Content="Images : " HorizontalAlignment="Left" Margin="551,11,0,0" VerticalAlignment="Top"/>
-                            <ListView MinWidth="100" MinHeight="100" HorizontalAlignment="Left" Height="Auto" Margin="551,42,0,0" VerticalAlignment="Top" ItemsSource="{Binding SelectedObservation.pictures}">
+
+                            <Label Visibility="{Binding IsObservationVisible}" Content="Images : " HorizontalAlignment="Left" Margin="551,11,0,0" VerticalAlignment="Top"/>
+                            <ListView Visibility="{Binding IsObservationVisible}" MinWidth="100" MinHeight="100" HorizontalAlignment="Left" Height="Auto" Margin="551,42,0,0" VerticalAlignment="Top" ItemsSource="{Binding SelectedObservation.pictures}">
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Horizontal" />

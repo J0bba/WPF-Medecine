@@ -24,9 +24,11 @@ namespace virsol_tMedicalDotNet.Services
                     Prescription = observation.prescription,
                     Weight = observation.weight
                 };
+                System.Console.WriteLine("on se met mal avant");
                 result = serviceObservation.AddObservation(idPatient, obs);
+                System.Console.WriteLine("on se met mal après");
             }
-            catch (Exception) { }
+            catch (Exception e) { Console.WriteLine("Exception : " + e.Message); }
             finally { serviceObservation.Close(); }
             return result;
             

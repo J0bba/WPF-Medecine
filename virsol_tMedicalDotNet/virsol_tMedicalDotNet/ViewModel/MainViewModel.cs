@@ -1,7 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
-using System;
+using Microsoft.Practices.ServiceLocation;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -17,6 +16,20 @@ namespace virsol_tMedicalDotNet.ViewModel
     {
 
         #region Variables
+        private Visibility _isObservationVisible = Visibility.Visible;
+        public Visibility IsObservationVisible
+        {
+            get
+            {
+                return _isObservationVisible;
+            }
+            set
+            {
+                _isObservationVisible = value;
+                RaisePropertyChanged("IsObservationVisible");
+            }
+        }
+
         private Patient _selectedPatient;
         public Patient SelectedPatient
         {
@@ -28,7 +41,12 @@ namespace virsol_tMedicalDotNet.ViewModel
             {
                 _selectedPatient = value;
                 if (value != null && _selectedPatient.observations.Count != 0)
+                {
                     SelectedObservation = _selectedPatient.observations.First();
+                    changeObsVisibility(Visibility.Visible);
+                }
+                else if (value != null && _selectedPatient.observations.Count == 0)
+                    changeObsVisibility(Visibility.Hidden);
                 RaisePropertyChanged("SelectedPatient");
             }
         }
@@ -41,6 +59,10 @@ namespace virsol_tMedicalDotNet.ViewModel
             set
             {
                 _selectedObservation = value;
+                if (value == null)
+                    changeObsVisibility(Visibility.Hidden);
+                else
+                    changeObsVisibility(Visibility.Visible);
                 RaisePropertyChanged("SelectedObservation");
             }
         }
@@ -140,6 +162,11 @@ namespace virsol_tMedicalDotNet.ViewModel
                 setVisibility(CurrUserLogin);
             });
             _worker.RunWorkerAsync();
+            _workerPatients.RunWorkerCompleted += new RunWorkerCompletedEventHandler((e, s) =>
+            {
+                SelectedPatient = PatientList.Count > 0 ?  PatientList.Last() : null;
+            }
+            );
             _workerPatients.DoWork += new DoWorkEventHandler((s, e) =>
             {
                 PatientList = Patients.GetAllPatients();
@@ -149,7 +176,6 @@ namespace virsol_tMedicalDotNet.ViewModel
 
         public void UpdatePatientList()
         {
-            System.Console.WriteLine("Ca passe par la pourtant !");
             _workerPatients.RunWorkerAsync();
         }
 
@@ -157,7 +183,7 @@ namespace virsol_tMedicalDotNet.ViewModel
         private void NewPatientMethod()
         {
             var app = new NewPatientView();
-            var context = new NewPatientViewModel();
+            var context = ServiceLocator.Current.GetInstance<NewPatientViewModel>();
             context.lastWindow = this;
             app.DataContext = context;
             app.Show();
@@ -166,11 +192,8 @@ namespace virsol_tMedicalDotNet.ViewModel
         private void NewObsMethod()
         {
             var app = new NewObsView();
-            var context = new NewObsViewModel();
-            
+            var context = ServiceLocator.Current.GetInstance<NewObsViewModel>();
             context.lastWindow = this;
-            System.Console.WriteLine("this : " + this, "context.lastwindow : " + context.lastWindow);
-            System.Console.WriteLine("context.lastwindow : " + context.lastWindow);
             app.DataContext = context;
             app.Show();
         }
@@ -207,6 +230,11 @@ namespace virsol_tMedicalDotNet.ViewModel
             }
         }
 
+        private void changeObsVisibility(Visibility visibility)
+        {
+            IsObservationVisible = visibility;
+        }
+
         private void NewUserMethod()
         {
             OpenNewUserWindow();
@@ -214,7 +242,7 @@ namespace virsol_tMedicalDotNet.ViewModel
         private void OpenNewUserWindow()
         {
             var app = new NewUserView();
-            var context = new NewUserViewModel();
+            var context = ServiceLocator.Current.GetInstance<NewUserViewModel>();
             context.lastWindow = this;
             app.DataContext = context;
             app.Show();

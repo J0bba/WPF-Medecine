@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Practices.ServiceLocation;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -64,7 +65,7 @@ namespace virsol_tMedicalDotNet.ViewModel
         {
             var current = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             var app = new MainView();
-            var context = new MainViewModel();
+            var context = ServiceLocator.Current.GetInstance<MainViewModel>();
             context.CurrUserLogin = currLogin;
             app.DataContext = context;
             app.Show();

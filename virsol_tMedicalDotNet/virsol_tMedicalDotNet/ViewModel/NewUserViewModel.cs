@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -95,7 +96,21 @@ namespace virsol_tMedicalDotNet.ViewModel
         private void CloseCurrentWindow()
         {
             var current = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            clearAllFields();
             current.Close();
+        }
+        public void onClose(object sender, CancelEventArgs e)
+        {
+            clearAllFields();
+        }
+        private void clearAllFields()
+        {
+            lastWindow = null;
+            Login = "";
+            Name = "";
+            Firstname = "";
+            Role = "";
+            Picture = null;
         }
     }
 }

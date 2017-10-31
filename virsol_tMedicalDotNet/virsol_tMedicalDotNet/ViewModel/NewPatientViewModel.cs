@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,7 +30,6 @@ namespace virsol_tMedicalDotNet.ViewModel
             }
         }
         private DateTime _birthDate = DateTime.Now;
-        public int MyProperty { get; set; }
         public ICommand CreatePatientCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         #endregion
@@ -65,7 +65,19 @@ namespace virsol_tMedicalDotNet.ViewModel
         private void CloseCurrentWindow()
         {
             var current = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            clearAllFields();
             current.Close();
+        }
+        public void onClose(object sender, CancelEventArgs e)
+        {
+            clearAllFields();
+        }
+        private void clearAllFields()
+        {
+            lastWindow = null;
+            Name = "";
+            Firstname = "";
+            Birthdate = DateTime.Now;
         }
         #endregion Methods
     }
