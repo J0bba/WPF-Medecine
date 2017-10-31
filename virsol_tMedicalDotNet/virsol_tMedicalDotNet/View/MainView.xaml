@@ -80,7 +80,7 @@
                             <ScrollViewer Height="Auto" MaxHeight="120"  Margin="16,338,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="410">
                                 <ListBox HorizontalAlignment="Left" ItemsSource="{Binding SelectedObservation.prescription}" VerticalAlignment="Top" MinHeight ="40" Height="Auto" Width="390" MaxWidth="390"/>
                             </ScrollViewer>
-                            <Button Visibility="{Binding Path=isNotInfirmiere}" Margin="16, 458, 0, 20" HorizontalAlignment="Left" Width="Auto" Content="Supprimer patient" Height="Auto" VerticalAlignment="Bottom" Command="{Binding DeletePatientCommand}"/>
+                            <Button Visibility="{Binding Path=isNotInfirmiere}" Margin="19,0,0,22.2" HorizontalAlignment="Left" Width="Auto" Content="Supprimer patient" Height="Auto" VerticalAlignment="Bottom" Command="{Binding DeletePatientCommand}"/>
                             
                             <Label Content="Images : " HorizontalAlignment="Left" Margin="551,11,0,0" VerticalAlignment="Top"/>
                             <ListView MinWidth="100" MinHeight="100" HorizontalAlignment="Left" Height="Auto" Margin="551,42,0,0" VerticalAlignment="Top" ItemsSource="{Binding SelectedObservation.pictures}">
@@ -100,7 +100,7 @@
                         </Grid>
                     </Border>
                     <Button Command="{Binding NewPatientCommand}" Visibility="{Binding Path=isNotInfirmiere}" Width="Auto" Content="Nouveau patient" HorizontalAlignment="Left" Margin="174,0,0,18.6" VerticalAlignment="Bottom" Height="Auto"/>
-                    <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Nouvelle observation" HorizontalAlignment="Left" Margin="159,0,0,50.6" VerticalAlignment="Bottom" Width="Auto" Height="Auto"/>
+                    <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Nouvelle observation" HorizontalAlignment="Left" Margin="305,0,0,60.6" VerticalAlignment="Bottom" Width="Auto" Height="Auto" Command="{Binding NewObsCommand}"/>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -165,11 +165,14 @@ namespace virsol_tMedicalDotNet.ViewModel
 
         private void NewObsMethod()
         {
-            /*var app = new NewObs();
-            var context = new NewUserViewModel();
+            var app = new NewObsView();
+            var context = new NewObsViewModel();
+            
             context.lastWindow = this;
+            System.Console.WriteLine("this : " + this, "context.lastwindow : " + context.lastWindow);
+            System.Console.WriteLine("context.lastwindow : " + context.lastWindow);
             app.DataContext = context;
-            app.Show();*/
+            app.Show();
         }
 
         private void DeletePatientMethod()
