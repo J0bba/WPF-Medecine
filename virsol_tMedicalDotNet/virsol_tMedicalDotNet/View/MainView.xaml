@@ -104,5 +104,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <Button Content="Se déconnecter" VerticalAlignment="Top" HorizontalAlignment="Right" Height="Auto" Width="Auto" Command="{Binding DisconnectCommand}"/>
     </Grid>
 </Window>

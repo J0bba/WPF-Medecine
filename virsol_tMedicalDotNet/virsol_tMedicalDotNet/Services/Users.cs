@@ -45,6 +45,18 @@ namespace virsol_tMedicalDotNet.Services
             return role;
         }
 
+        public static void DisconnectUser(string login)
+        {
+            ServiceUserClient serviceUser = new ServiceUserClient();
+            try
+            {
+                serviceUser.Disconnect(login);
+            }
+            catch (Exception) { }
+            finally { serviceUser.Close(); }
+           
+        }
+
         public static Model.User GetUser(string login)
         {
             Model.User user = new Model.User();

@@ -143,6 +143,7 @@ namespace virsol_tMedicalDotNet.ViewModel
         public ICommand NewObsCommand { get; set; }
         public ICommand DeletePatientCommand { get; set; }
         public ICommand NewPatientCommand { get; set; }
+        public ICommand DisconnectCommand { get; set; }
         #endregion
 
 
@@ -155,6 +156,7 @@ namespace virsol_tMedicalDotNet.ViewModel
             NewObsCommand = new RelayCommand(NewObsMethod);
             DeletePatientCommand = new RelayCommand(DeletePatientMethod);
             NewPatientCommand = new RelayCommand(NewPatientMethod);
+            DisconnectCommand = new RelayCommand(DisconnectMethod);
             _worker.DoWork += new DoWorkEventHandler((s, e) =>
             {
                 ListUsers = Users.GetAllUsers();
@@ -180,6 +182,24 @@ namespace virsol_tMedicalDotNet.ViewModel
         }
 
         #region Methods
+        private void DisconnectMethod()
+        {
+            Users.DisconnectUser(CurrUserLogin);
+            OpenLoginWindow();
+
+        }
+
+        private void OpenLoginWindow()
+        {
+            var current = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            var app = new LoginView();
+            var context = ServiceLocator.Current.GetInstance<LoginViewModel>();
+            app.DataContext = context;
+            app.Show();
+            clearAllFields();
+            current.Close();
+        }
+
         private void NewPatientMethod()
         {
             var app = new NewPatientView();
@@ -246,6 +266,16 @@ namespace virsol_tMedicalDotNet.ViewModel
             context.lastWindow = this;
             app.DataContext = context;
             app.Show();
+        }
+        private void CloseCurrentWindow()
+        {
+            var current = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            clearAllFields();
+            current.Close();
+        }
+        private void clearAllFields()
+        {
+
         }
         #endregion
     }

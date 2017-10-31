@@ -1,26 +1,15 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using System.Windows;
-using System.Windows.Controls;
-using virsol_tMedicalDotNet.ViewModel;
+﻿using System.Windows;
 
-namespace virsol_tMedicalDotNet
+namespace virsol_tMedicalDotNet.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour LoginViewCopie.xaml
     /// </summary>
     public partial class LoginView : Window
     {
-        /// <summary>
-        /// Initializes a new instance of the MainWindow class.
-        /// </summary>
         public LoginView()
         {
-            //InitializeComponent();
-            Messenger.Default.Register<NotificationMessage>(this, NotificationMessageReceived);
-        }
-
-        private void NotificationMessageReceived(NotificationMessage msg)
-        {
+            InitializeComponent();
         }
     }
 }

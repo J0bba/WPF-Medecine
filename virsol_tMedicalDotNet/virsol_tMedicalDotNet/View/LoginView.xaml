@@ -10,7 +10,7 @@
         Title="MedicalDotNet"
         DataContext="{Binding LoginView, Source={StaticResource Locator}}">
 
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
