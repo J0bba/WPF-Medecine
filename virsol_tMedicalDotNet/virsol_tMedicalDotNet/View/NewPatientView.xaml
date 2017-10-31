@@ -1,0 +1,23 @@
+﻿<Window x:Class="virsol_tMedicalDotNet.View.NewPatientView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:virsol_tMedicalDotNet.View"
+        mc:Ignorable="d"
+        Title="Ajouter un patient"
+        Height="600"
+        Width="800"
+        DataContext="{Binding NewPatientView, Source={StaticResource Locator}}">
+    <Grid>
+        <Label Content="Name :" HorizontalAlignment="Left" Margin="84,68,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="171,71,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Firstname :" HorizontalAlignment="Left" Margin="84,109,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="171,113,0,0" TextWrapping="Wrap" Text="{Binding Firstname}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Birthdate :" HorizontalAlignment="Left" Margin="84,153,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="171,155,0,0" VerticalAlignment="Top" SelectedDate="{Binding Birthdate}"/>
+        <Button Content="Valider" HorizontalAlignment="Left" Margin="385,249,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CreatePatientCommand}"/>
+        <Button Content="Annuler" HorizontalAlignment="Left" Margin="291,249,0,0" VerticalAlignment="Top" Width="75" Command="{Binding CancelCommand}"/>
+
+    </Grid>
+</Window>

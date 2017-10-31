@@ -42,6 +42,7 @@ namespace virsol_tMedicalDotNet.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<NewUserViewModel>();
+            SimpleIoc.Default.Register<NewPatientViewModel>();
         }
 
 
@@ -73,6 +74,14 @@ namespace virsol_tMedicalDotNet.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<NewUserViewModel>();
+            }
+        }
+
+        public NewPatientViewModel NewPatientView
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<NewPatientViewModel>();
             }
         }
 

@@ -27,7 +27,8 @@ namespace virsol_tMedicalDotNet.ViewModel
             set
             {
                 _selectedPatient = value;
-                SelectedObservation = _selectedPatient.observations.First();
+                if (value != null && _selectedPatient.observations.Count != 0)
+                    SelectedObservation = _selectedPatient.observations.First();
                 RaisePropertyChanged("SelectedPatient");
             }
         }
@@ -117,6 +118,9 @@ namespace virsol_tMedicalDotNet.ViewModel
         #region Commands
         public ICommand DeleteUserCommand { get; set; }
         public ICommand NewUserCommand { get; set; }
+        public ICommand NewObsCommand { get; set; }
+        public ICommand DeletePatientCommand { get; set; }
+        public ICommand NewPatientCommand { get; set; }
         #endregion
 
 
@@ -126,22 +130,64 @@ namespace virsol_tMedicalDotNet.ViewModel
 
             DeleteUserCommand = new RelayCommand(DeleteUserMethod);
             NewUserCommand = new RelayCommand(NewUserMethod);
+            NewObsCommand = new RelayCommand(NewObsMethod);
+            DeletePatientCommand = new RelayCommand(DeletePatientMethod);
+            NewPatientCommand = new RelayCommand(NewPatientMethod);
             _worker.DoWork += new DoWorkEventHandler((s, e) =>
             {
                 ListUsers = Users.GetAllUsers();
-                //CurrUser = Users.GetUser(CurrUserLogin);
+                CurrUser = Users.GetUser(CurrUserLogin);
                 setVisibility(CurrUserLogin);
             });
             _worker.RunWorkerAsync();
             _workerPatients.DoWork += new DoWorkEventHandler((s, e) =>
             {
                 PatientList = Patients.GetAllPatients();
-                
             });
             _workerPatients.RunWorkerAsync();
         }
 
+        public void UpdatePatientList()
+        {
+            System.Console.WriteLine("Ca passe par la pourtant !");
+            _workerPatients.RunWorkerAsync();
+        }
+
         #region Methods
+        private void NewPatientMethod()
+        {
+            var app = new NewPatientView();
+            var context = new NewPatientViewModel();
+            context.lastWindow = this;
+            app.DataContext = context;
+            app.Show();
+        }
+
+        private void NewObsMethod()
+        {
+            /*var app = new NewObs();
+            var context = new NewUserViewModel();
+            context.lastWindow = this;
+            app.DataContext = context;
+            app.Show();*/
+        }
+
+        private void DeletePatientMethod()
+        {
+            int id = SelectedPatient.id;
+            if (Patients.DeletePatient(id))
+            {
+                MessageBox.Show("Le patient " + SelectedPatient.prettyname + " a été supprimé avec succès !");
+                PatientList.Remove(PatientList.Where(i => i.id == id).Single());
+                SelectedPatient = PatientList.Count > 0 ? PatientList.First() : null;
+
+            }
+            else
+            {
+                MessageBox.Show("Le patient " + SelectedPatient.prettyname + " n'a pas put être supprimé Réessayez plus tard !");
+            }
+        }
+
         private void DeleteUserMethod()
         {
             string login = SelectedUser.login;

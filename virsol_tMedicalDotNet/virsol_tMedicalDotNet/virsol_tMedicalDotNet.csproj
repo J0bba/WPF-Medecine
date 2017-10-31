@@ -100,8 +100,10 @@
     <Compile Include="Model\Observation.cs" />
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Services\Observations.cs" />
     <Compile Include="Services\Patients.cs" />
     <Compile Include="Services\Users.cs" />
+    <Compile Include="ViewModel\NewPatientViewModel.cs" />
     <Compile Include="ViewModel\NewUserViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -116,6 +118,9 @@
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\NewPatientView.xaml.cs">
+      <DependentUpon>NewPatientView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NewUserView.xaml.cs">
       <DependentUpon>NewUserView.xaml</DependentUpon>
     </Compile>
@@ -128,6 +133,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NewPatientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

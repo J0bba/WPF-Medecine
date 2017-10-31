@@ -58,7 +58,6 @@ namespace virsol_tMedicalDotNet.Services
                 user.name = userS.Name;
                 user.picture = userS.Picture;
                 user.firstname = userS.Firstname;
-                serviceUser.Close();
                 return user;
 
             }
