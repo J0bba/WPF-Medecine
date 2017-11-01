@@ -1,12 +1,16 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using virsol_tMedicalDotNet.Model;
+using virsol_tMedicalDotNet.ServiceLive;
 using virsol_tMedicalDotNet.Services;
 using virsol_tMedicalDotNet.View;
 
@@ -16,6 +20,93 @@ namespace virsol_tMedicalDotNet.ViewModel
     {
 
         #region Variables
+        #region Chart
+        private ObservableCollection<ChartData> _chartDataHeart = new ObservableCollection<Model.ChartData>();
+        public ObservableCollection<ChartData> ChartDataHeart
+        {
+            get
+            {
+                return _chartDataHeart;
+            }
+            set
+            {
+                _chartDataHeart = value;
+                RaisePropertyChanged("ChartDataHeart");
+            }
+        }
+        private ObservableCollection<ChartData> _chartDataTemp = new ObservableCollection<Model.ChartData>();
+        public ObservableCollection<ChartData> ChartDataTemp
+        {
+            get
+            {
+                return _chartDataTemp;
+            }
+            set
+            {
+                _chartDataTemp = value;
+                RaisePropertyChanged("ChartDataTemp");
+            }
+        }
+        #endregion Chart
+
+        private string _liveHeart;
+        private string _liveTemp;
+        public string LiveHeart
+        {
+            get
+            {
+                return _liveHeart;
+            }
+            set
+            {
+                _liveHeart = value;
+                RaisePropertyChanged("LiveHeart");
+            }
+        }
+        public string LiveTemp
+        {
+            get
+            {
+                return _liveTemp;
+            }
+            set
+            {
+                _liveTemp = value;
+                RaisePropertyChanged("LiveTemp");
+            }
+        }
+
+
+        public ServiceLiveClient ServiceLive { get; set; }
+
+        private TabItem _selectedTab;
+
+        public TabItem SelectedTab
+        {
+            get
+            {
+                return _selectedTab;
+            }
+            set
+            {
+                _selectedTab = value;
+                if (value.Header.Equals("Live")) {
+                    // Start Live Thing
+                    ServiceLive = Live.Subscribe(this);
+                }
+                else
+                {
+                    //Cancel live thing here
+                    if (ServiceLive != null)
+                    {
+                        ServiceLive.Close();
+                        ServiceLive = null;
+                    }
+                }
+
+
+            }
+        }
         private Visibility _isObservationVisible = Visibility.Visible;
         public Visibility IsObservationVisible
         {
@@ -275,8 +366,10 @@ namespace virsol_tMedicalDotNet.ViewModel
         }
         private void clearAllFields()
         {
-
+            ListUsers.Clear();
+            PatientList.Clear();
         }
+
         #endregion
     }
 }

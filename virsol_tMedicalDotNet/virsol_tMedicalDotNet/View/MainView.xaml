@@ -1,5 +1,6 @@
 ﻿<Window x:Class="virsol_tMedicalDotNet.View.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:xctk="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -20,7 +21,7 @@
     </Window.Resources>
 
     <Grid x:Name="RootLayout">
-        <TabControl>
+        <TabControl SelectedItem="{Binding SelectedTab}">
             <TabItem Header="Utilisateurs">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
@@ -103,7 +104,26 @@
                     <Button Visibility="{Binding Path=isNotInfirmiere}" Content="Nouvelle observation" HorizontalAlignment="Left" Margin="305,0,0,60.6" VerticalAlignment="Bottom" Width="Auto" Height="Auto" Command="{Binding NewObsCommand}"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Live">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <!--<Label Content="LiveTemp : " HorizontalAlignment="Left" Margin="74,96,0,0" VerticalAlignment="Top"/>
+                    <Label Content="LiveHeart : " HorizontalAlignment="Left" Margin="74,50,0,0" VerticalAlignment="Top"/>
+                    <Label Content="{Binding LiveTemp}" HorizontalAlignment="Left" Margin="187,96,0,0" VerticalAlignment="Top"/>
+                    <Label Content="{Binding LiveHeart}" HorizontalAlignment="Left" Margin="187,50,0,0" VerticalAlignment="Top"/>-->
+                    <xctk:Chart Grid.Row="0">
+                        <xctk:LineSeries ItemsSource="{Binding Path=ChartDataHeart}" IndependentValueBinding="{Binding Name}" DependentValueBinding="{Binding Value}"/>
+                    </xctk:Chart>
+                    <xctk:Chart Grid.Row="1">
+                        <xctk:LineSeries ItemsSource="{Binding Path=ChartDataTemp}" IndependentValueBinding="{Binding Name}" DependentValueBinding="{Binding Value}"/>
+                    </xctk:Chart>
+                    
+                </Grid>
+            </TabItem>
         </TabControl>
-        <Button Content="Se déconnecter" VerticalAlignment="Top" HorizontalAlignment="Right" Height="Auto" Width="Auto" Command="{Binding DisconnectCommand}"/>
+        <Button Content="Se déconnecter" Margin="0,0,20,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="Auto" Width="Auto" Command="{Binding DisconnectCommand}"/>
     </Grid>
 </Window>
