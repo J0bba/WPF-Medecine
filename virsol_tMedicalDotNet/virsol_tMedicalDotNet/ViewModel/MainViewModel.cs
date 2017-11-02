@@ -1,5 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.ObjectModel;
@@ -19,9 +22,69 @@ namespace virsol_tMedicalDotNet.ViewModel
     public class MainViewModel : ViewModelBase
     {
 
+        public MainViewModel()
+        {
+            initCharts();
+
+            DeleteUserCommand = new RelayCommand(DeleteUserMethod);
+            NewUserCommand = new RelayCommand(NewUserMethod);
+            NewObsCommand = new RelayCommand(NewObsMethod);
+            DeletePatientCommand = new RelayCommand(DeletePatientMethod);
+            NewPatientCommand = new RelayCommand(NewPatientMethod);
+            DisconnectCommand = new RelayCommand(DisconnectMethod);
+            _worker.DoWork += new DoWorkEventHandler((s, e) =>
+            {
+                ListUsers = Users.GetAllUsers();
+                CurrUser = Users.GetUser(CurrUserLogin);
+                setVisibility(CurrUserLogin);
+            });
+            _worker.RunWorkerAsync();
+            _workerPatients.RunWorkerCompleted += new RunWorkerCompletedEventHandler((e, s) =>
+            {
+                SelectedPatient = PatientList.Count > 0 ? PatientList.Last() : null;
+            }
+            );
+            _workerPatients.DoWork += new DoWorkEventHandler((s, e) =>
+            {
+                PatientList = Patients.GetAllPatients();
+            });
+            _workerPatients.RunWorkerAsync();
+        }
+
         #region Variables
         #region Chart
-        private ObservableCollection<ChartData> _chartDataHeart = new ObservableCollection<Model.ChartData>();
+        public Func<double, string> YFormater { get; set; }
+        public SeriesCollection SeriesCollectionTemp { get; set; }
+        public LineSeries lineSeriesTemp { get; set; }
+        private ObservableCollection<string> _chartLabelsTemp = new ObservableCollection<string>();
+        public ObservableCollection<string> ChartLabelsTemp
+        {
+            get
+            {
+                return _chartLabelsTemp;
+            }
+            set
+            {
+                _chartLabelsTemp = value;
+                RaisePropertyChanged("ChartLabelsTemp");
+            }
+        }
+        public SeriesCollection SeriesCollectionHeart { get; set; }
+        public LineSeries lineSeriesHeart { get; set; }
+        private ObservableCollection<string> _chartLabelsHeart = new ObservableCollection<string>();
+        public ObservableCollection<string> ChartLabelsHeart
+        {
+            get
+            {
+                return _chartLabelsHeart;
+            }
+            set
+            {
+                _chartLabelsHeart = value;
+                RaisePropertyChanged("ChartLabelsHeart");
+            }
+        }
+        /*private ObservableCollection<ChartData> _chartDataHeart = new ObservableCollection<Model.ChartData>();
         public ObservableCollection<ChartData> ChartDataHeart
         {
             get
@@ -46,36 +109,8 @@ namespace virsol_tMedicalDotNet.ViewModel
                 _chartDataTemp = value;
                 RaisePropertyChanged("ChartDataTemp");
             }
-        }
+        }*/
         #endregion Chart
-
-        private string _liveHeart;
-        private string _liveTemp;
-        public string LiveHeart
-        {
-            get
-            {
-                return _liveHeart;
-            }
-            set
-            {
-                _liveHeart = value;
-                RaisePropertyChanged("LiveHeart");
-            }
-        }
-        public string LiveTemp
-        {
-            get
-            {
-                return _liveTemp;
-            }
-            set
-            {
-                _liveTemp = value;
-                RaisePropertyChanged("LiveTemp");
-            }
-        }
-
 
         public ServiceLiveClient ServiceLive { get; set; }
 
@@ -102,8 +137,9 @@ namespace virsol_tMedicalDotNet.ViewModel
                         try
                         {
                             ServiceLive.Close();
-                            ChartDataHeart.Clear();
-                            ChartDataTemp.Clear();
+                            clearCharts();
+                            //ChartDataHeart.Clear();
+                            //ChartDataTemp.Clear();
                         }
                         catch (Exception) { }
                         ServiceLive = null;
@@ -244,35 +280,6 @@ namespace virsol_tMedicalDotNet.ViewModel
         #endregion
 
 
-
-        public MainViewModel()
-        {
-
-            DeleteUserCommand = new RelayCommand(DeleteUserMethod);
-            NewUserCommand = new RelayCommand(NewUserMethod);
-            NewObsCommand = new RelayCommand(NewObsMethod);
-            DeletePatientCommand = new RelayCommand(DeletePatientMethod);
-            NewPatientCommand = new RelayCommand(NewPatientMethod);
-            DisconnectCommand = new RelayCommand(DisconnectMethod);
-            _worker.DoWork += new DoWorkEventHandler((s, e) =>
-            {
-                ListUsers = Users.GetAllUsers();
-                CurrUser = Users.GetUser(CurrUserLogin);
-                setVisibility(CurrUserLogin);
-            });
-            _worker.RunWorkerAsync();
-            _workerPatients.RunWorkerCompleted += new RunWorkerCompletedEventHandler((e, s) =>
-            {
-                SelectedPatient = PatientList.Count > 0 ?  PatientList.Last() : null;
-            }
-            );
-            _workerPatients.DoWork += new DoWorkEventHandler((s, e) =>
-            {
-                PatientList = Patients.GetAllPatients();
-            });
-            _workerPatients.RunWorkerAsync();
-        }
-
         public void UpdatePatientList()
         {
             _workerPatients.RunWorkerAsync();
@@ -374,6 +381,43 @@ namespace virsol_tMedicalDotNet.ViewModel
         {
             ListUsers.Clear();
             PatientList.Clear();
+        }
+
+        private void initCharts()
+        {
+            lineSeriesTemp = new LineSeries()
+            {
+                Title = "Temp",
+                Stroke = Brushes.RoyalBlue,
+                Fill = Brushes.LightSkyBlue,
+                LineSmoothness = 0,
+                Values = new ChartValues<double> { }
+                
+            };
+            SeriesCollectionTemp = new SeriesCollection()
+            {
+                lineSeriesTemp
+            };
+
+            lineSeriesHeart = new LineSeries()
+            {
+                Title = "Heart",
+                LineSmoothness = 0,
+                Stroke = Brushes.OrangeRed,
+                Fill = Brushes.Salmon,
+                Values = new ChartValues<double> { }
+            };
+            SeriesCollectionHeart = new SeriesCollection()
+            {
+                lineSeriesHeart
+            };
+        }
+        private void clearCharts()
+        {
+            ChartLabelsHeart.Clear();
+            ChartLabelsTemp.Clear();
+            SeriesCollectionHeart.First().Values.Clear();
+            SeriesCollectionTemp.First().Values.Clear();
         }
 
         #endregion
