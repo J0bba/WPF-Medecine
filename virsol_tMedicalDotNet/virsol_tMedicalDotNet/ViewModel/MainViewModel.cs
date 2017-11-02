@@ -99,7 +99,13 @@ namespace virsol_tMedicalDotNet.ViewModel
                     //Cancel live thing here
                     if (ServiceLive != null)
                     {
-                        ServiceLive.Close();
+                        try
+                        {
+                            ServiceLive.Close();
+                            ChartDataHeart.Clear();
+                            ChartDataTemp.Clear();
+                        }
+                        catch (Exception) { }
                         ServiceLive = null;
                     }
                 }

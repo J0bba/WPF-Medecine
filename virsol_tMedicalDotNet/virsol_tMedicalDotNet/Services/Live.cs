@@ -21,7 +21,7 @@ namespace virsol_tMedicalDotNet.Services
         {
             //System.Console.WriteLine("Heart : " + requestData.ToString());
             ViewModel.ChartDataHeart.Add(new Model.ChartData() { Name = DateTime.Now, Value = requestData });
-            if (ViewModel.ChartDataHeart.Count > 20)
+            if (ViewModel.ChartDataHeart.Count > 50)
                 ViewModel.ChartDataHeart.Remove(ViewModel.ChartDataHeart.First());
             //ViewModel.LiveHeart = requestData.ToString();
         }
@@ -30,7 +30,7 @@ namespace virsol_tMedicalDotNet.Services
         {
             //System.Console.WriteLine("Temp : " + requestData.ToString());
             ViewModel.ChartDataTemp.Add(new Model.ChartData() { Name = DateTime.Now, Value = requestData });
-            if (ViewModel.ChartDataTemp.Count > 20)
+            if (ViewModel.ChartDataTemp.Count > 50)
                 ViewModel.ChartDataTemp.Remove(ViewModel.ChartDataTemp.First());
             //ViewModel.LiveTemp = requestData.ToString();
         }
