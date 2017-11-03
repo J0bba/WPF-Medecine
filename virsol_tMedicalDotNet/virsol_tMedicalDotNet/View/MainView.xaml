@@ -24,7 +24,7 @@
     </Window.Resources>
 
     <Grid x:Name="RootLayout">
-        <TabControl SelectedIndex="2"  SelectedItem="{Binding SelectedTab}">
+        <TabControl SelectedItem="{Binding SelectedTab}">
             <TabItem Header="Utilisateurs">
                 <Grid Background="#EEEEEE">
                     <Grid.RowDefinitions>
