@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using BespokeFusion;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LiveCharts;
 using LiveCharts.Defaults;
@@ -36,6 +37,7 @@ namespace virsol_tMedicalDotNet.ViewModel
             {
                 ListUsers = Users.GetAllUsers();
                 CurrUser = Users.GetUser(CurrUserLogin);
+                SelectedUser = ListUsers.First();
                 setVisibility(CurrUserLogin);
             });
             _worker.RunWorkerAsync();
@@ -327,14 +329,18 @@ namespace virsol_tMedicalDotNet.ViewModel
             int id = SelectedPatient.id;
             if (Patients.DeletePatient(id))
             {
-                MessageBox.Show("Le patient " + SelectedPatient.prettyname + " a été supprimé avec succès !");
+                var msg = Utils.Utils.createMessageBox("Le patient " + SelectedPatient.prettyname + " a été supprimé avec succès !");
+                msg.Show();
+                //MessageBox.Show("Le patient " + SelectedPatient.prettyname + " a été supprimé avec succès !");
                 PatientList.Remove(PatientList.Where(i => i.id == id).Single());
                 SelectedPatient = PatientList.Count > 0 ? PatientList.First() : null;
 
             }
             else
             {
-                MessageBox.Show("Le patient " + SelectedPatient.prettyname + " n'a pas put être supprimé Réessayez plus tard !");
+
+                MaterialMessageBox.ShowError("Le patient " + SelectedPatient.prettyname + " n'a pas put être supprimé Réessayez plus tard !");
+                //MessageBox.Show("Le patient " + SelectedPatient.prettyname + " n'a pas put être supprimé Réessayez plus tard !");
             }
         }
 
@@ -343,14 +349,15 @@ namespace virsol_tMedicalDotNet.ViewModel
             string login = SelectedUser.login;
             if (Users.DeleteUser(login))
             {
-                MessageBox.Show("L'utilisateur " + login + " a été supprimé avec succès !");
+                var msg = Utils.Utils.createMessageBox("L'utilisateur " + login + " a été supprimé avec succès !");
+                msg.Show();
                 ListUsers.Remove(ListUsers.Where(i => i.login == login).Single());
                 SelectedUser = ListUsers.First();
 
             }
             else
             {
-                MessageBox.Show("L'utilisateur " + login + " n'a pas put être supprimé Réessayez plus tard !");
+                MaterialMessageBox.ShowError("L'utilisateur " + login + " n'a pas put être supprimé Réessayez plus tard !");
             }
         }
 
@@ -387,9 +394,9 @@ namespace virsol_tMedicalDotNet.ViewModel
         {
             lineSeriesTemp = new LineSeries()
             {
-                Title = "Temp",
+                Title = "Température",
                 Stroke = Brushes.RoyalBlue,
-                Fill = Brushes.LightSkyBlue,
+                Fill = Brushes.Transparent,
                 LineSmoothness = 0,
                 Values = new ChartValues<double> { }
                 
@@ -401,10 +408,10 @@ namespace virsol_tMedicalDotNet.ViewModel
 
             lineSeriesHeart = new LineSeries()
             {
-                Title = "Heart",
+                Title = "Coeur",
                 LineSmoothness = 0,
                 Stroke = Brushes.OrangeRed,
-                Fill = Brushes.Salmon,
+                Fill = Brushes.Transparent,
                 Values = new ChartValues<double> { }
             };
             SeriesCollectionHeart = new SeriesCollection()

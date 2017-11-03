@@ -4,8 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d ignore"
-        Height="453.308"
+        Height="465"
         Width="598.881"
         Title="MedicalDotNet"
         DataContext="{Binding LoginView, Source={StaticResource Locator}}">
@@ -15,17 +23,53 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Skins/MainSkin.xaml" />
+                <ResourceDictionary Source="../Theme/Theme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    <!--
+    <materialDesign:Card Height="384" Margin="10,10,10,10" Padding="0,0,0,200">
+        <Grid Height="384" x:Name="RootLayout" Margin="0,0,-0.2,0">
+            <Label Content="MedicalDotNet Login" Width="Auto" VerticalAlignment="Top" Margin="210,10,210,0"/>
+            <Label Content="Login" Height="Auto" VerticalAlignment="Top" Margin="253,81,253,0"/>
+            <TextBox  Height="Auto" Margin="217,116,217,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding Path=Login,UpdateSourceTrigger=Default, Mode=TwoWay}"/>
+            <Label Content="Password :" Margin="0,144,0,0" VerticalAlignment="Top"/>
+            <PasswordBox Name="MyPasswordBox" Margin="0, 200,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+            <Button Content="Connect" HorizontalAlignment="Left" Margin="424,310,0,-158" VerticalAlignment="Top" Width="Auto" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=MyPasswordBox}"/>
 
-    <Grid x:Name="RootLayout">
-        <Label Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="278,22,274.8,0"/>
-        <Label Content="Login :" HorizontalAlignment="Left" Margin="76,70,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="162,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path=Login,UpdateSourceTrigger=Default, Mode=TwoWay}"/>
-        <Label Content="Password :" HorizontalAlignment="Left" Margin="76,112,0,0" VerticalAlignment="Top"/>
-        <PasswordBox Name="MyPasswordBox" HorizontalAlignment="Left" Margin="162,112,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
-        <Button Content="Connect" HorizontalAlignment="Left" Margin="392,159,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=MyPasswordBox}"/>
-
+        </Grid>
+    </materialDesign:Card>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <materialDesign:Card Height="374" Grid.Row="1" Grid.ColumnSpan="3" Margin="34,0.2,34,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label HorizontalAlignment="Center" VerticalAlignment="Top" Content="MedicalDotNet" Margin="0,10,0,0"/>
+                <Label Content="Login" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="75"/>
+                <TextBox Text="{Binding Path=Login,UpdateSourceTrigger=Default, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" Width="120" Height="Auto" Margin="168,100,168.8,0"/>
+                <Label Content="Password" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="165"/>
+                <PasswordBox Name="MyPasswordBox" HorizontalContentAlignment="Center" Height="Auto" Margin="169,195,168.8,195.2"/>
+                <Button Content="Connect" Margin="318,322,30.8,61.2" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=MyPasswordBox}"/>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </Window>

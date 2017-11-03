@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using BespokeFusion;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using virsol_tMedicalDotNet.Services;
 using virsol_tMedicalDotNet.View;
 
@@ -52,12 +54,13 @@ namespace virsol_tMedicalDotNet.ViewModel
             {
                 lastWindow.UpdatePatientList();
                 CloseCurrentWindow();
-                MessageBox.Show("Patient créé avec succès !");
+                var msg = Utils.Utils.createMessageBox("Patient crée avec succés");
+                msg.Show();
 
             }
             else
             {
-                MessageBox.Show("Impossible de créer un nouveau patient !");
+                MaterialMessageBox.ShowError("Impossible de créer un nouveau patient !");
             }
 
         }

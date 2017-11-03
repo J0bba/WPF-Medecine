@@ -9,22 +9,31 @@
         Height="600"
         Width="800"
         DataContext="{Binding NewUserView, Source={StaticResource Locator}}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Skins/MainSkin.xaml" />
+                <ResourceDictionary Source="../Theme/Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <Label Content="Login : " HorizontalAlignment="Left" Margin="87,47,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="175,47,0,0" TextWrapping="Wrap" Text="{Binding Login}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Password : " HorizontalAlignment="Left" Margin="87,90,0,0" VerticalAlignment="Top"/>
-        <PasswordBox Name="PasswordBox" HorizontalAlignment="Left" Height="23" Margin="175,90,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Name : " HorizontalAlignment="Left" Margin="87,131,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="175,131,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Firstname : " HorizontalAlignment="Left" Margin="87,174,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="175,174,0,0" TextWrapping="Wrap" Text="{Binding Firstname}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Role : " HorizontalAlignment="Left" Margin="87,217,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="175,217,0,0" TextWrapping="Wrap" Text="{Binding Role}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Picture : " HorizontalAlignment="Left" Margin="87,263,0,0" VerticalAlignment="Top"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="175,263,0,0" VerticalAlignment="Top" Width="100" Source="{Binding Picture}"/>
-        <Button Content="Charger une image" HorizontalAlignment="Left" Margin="328,308,0,0" VerticalAlignment="Top" Width="Auto" Command="{Binding AddImageCommand}"/>
-        <Button Content="Valider" HorizontalAlignment="Left" Margin="709,541,0,0" VerticalAlignment="Bottom" Width="75" Command="{Binding CreateUserCommand}" CommandParameter="{Binding ElementName=PasswordBox}"/>
-        <Button Content="Annuler" HorizontalAlignment="Left" Margin="615,541,0,0" VerticalAlignment="Bottom" Width="75" Command="{Binding CancelCommand}"/>
+        <Label Content="Login : " HorizontalAlignment="Left" Margin="178,131,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="266,131,0,0" TextWrapping="Wrap" Text="{Binding Login}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Password : " HorizontalAlignment="Left" Margin="178,174,0,0" VerticalAlignment="Top"/>
+        <PasswordBox Name="PasswordBox" HorizontalAlignment="Left" Height="23" Margin="266,174,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Name : " HorizontalAlignment="Left" Margin="178,215,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="266,215,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Firstname : " HorizontalAlignment="Left" Margin="178,258,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="266,258,0,0" TextWrapping="Wrap" Text="{Binding Firstname}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Role : " HorizontalAlignment="Left" Margin="178,301,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="266,301,0,0" TextWrapping="Wrap" Text="{Binding Role}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Picture : " HorizontalAlignment="Left" Margin="178,347,0,0" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="266,347,0,0" VerticalAlignment="Top" Width="100" Source="{Binding Picture}"/>
+        <Button Content="Charger une image" HorizontalAlignment="Left" Margin="419,392,0,0" VerticalAlignment="Top" Width="Auto" Command="{Binding AddImageCommand}"/>
+        <Button Content="Valider" HorizontalAlignment="Left" Margin="691,0,0,18.4" VerticalAlignment="Bottom" Width="Auto" Command="{Binding CreateUserCommand}" CommandParameter="{Binding ElementName=PasswordBox}"/>
+        <Button Content="Annuler" HorizontalAlignment="Left" Margin="597,0,0,18.4" VerticalAlignment="Bottom" Width="Auto" Command="{Binding CancelCommand}"/>
+        <Label Content="Utilisateur : " HorizontalAlignment="Left" Margin="356,37,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

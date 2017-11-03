@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using BespokeFusion;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
@@ -63,11 +64,12 @@ namespace virsol_tMedicalDotNet.ViewModel
                 lastWindow.ListUsers.Add(newUser);
                 lastWindow.SelectedUser = newUser;
                 CloseCurrentWindow();
-                MessageBox.Show("Utilisateur créé avec succès !");
+                var msg = Utils.Utils.createMessageBox("Utilisateur créé avec succès !");
+                msg.Show();
             }
             else
             {
-                MessageBox.Show("Impossible de créer un nouvel utilisateur !");
+                MaterialMessageBox.ShowError("Impossible de créer un nouvel utilisateur !");
             }
         }
 

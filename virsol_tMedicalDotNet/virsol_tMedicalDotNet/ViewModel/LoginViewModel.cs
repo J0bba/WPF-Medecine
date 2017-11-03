@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using BespokeFusion;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Practices.ServiceLocation;
@@ -48,7 +49,7 @@ namespace virsol_tMedicalDotNet.ViewModel
                 else
                 {
                     // SHOW DIALOG BOX
-                    MessageBox.Show("Wrong login/password");
+                    MaterialMessageBox.ShowError("Wrong login/password");
                 }
             }
             catch (System.ServiceModel.EndpointNotFoundException)
@@ -65,7 +66,7 @@ namespace virsol_tMedicalDotNet.ViewModel
         {
             var current = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             var app = new MainView();
-            var context = ServiceLocator.Current.GetInstance<MainViewModel>();
+            var context = new MainViewModel();
             context.CurrUserLogin = currLogin;
             app.DataContext = context;
             app.Show();
