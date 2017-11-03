@@ -17,8 +17,8 @@ namespace virsol_tMedicalDotNet.Utils
             {
                 TxtMessage = { Text = msg },
                 TxtTitle = { Text = "Succés", Foreground = Brushes.White },
-                BtnOk = { Content = "Ok" , Background = Brushes.BlueViolet},
-                BtnCancel = { Visibility = Visibility.Collapsed, BorderBrush = Brushes.Transparent},
+                BtnOk = { Content = "Ok" , Background = Brushes.BlueViolet, BorderBrush = Brushes.Transparent},
+                BtnCancel = { Visibility = Visibility.Collapsed},
                 TitleBackgroundPanel = { Background = Brushes.BlueViolet },
                 BorderBrush = Brushes.Transparent
             };

@@ -33,11 +33,14 @@ namespace virsol_tMedicalDotNet.ViewModel
             DeletePatientCommand = new RelayCommand(DeletePatientMethod);
             NewPatientCommand = new RelayCommand(NewPatientMethod);
             DisconnectCommand = new RelayCommand(DisconnectMethod);
+            RefreshPatientList = new RelayCommand(RefreshPatientListMethod);
+            RefreshUserList = new RelayCommand(RefreshUserListMethod);
             _worker.DoWork += new DoWorkEventHandler((s, e) =>
             {
                 ListUsers = Users.GetAllUsers();
                 CurrUser = Users.GetUser(CurrUserLogin);
                 SelectedUser = ListUsers.First();
+                FullListUser = new ObservableCollection<User>(ListUsers);
                 setVisibility(CurrUserLogin);
             });
             _worker.RunWorkerAsync();
@@ -49,11 +52,52 @@ namespace virsol_tMedicalDotNet.ViewModel
             _workerPatients.DoWork += new DoWorkEventHandler((s, e) =>
             {
                 PatientList = Patients.GetAllPatients();
+                FullListPatient = new ObservableCollection<Patient>(PatientList);
             });
             _workerPatients.RunWorkerAsync();
+            _searchUserWorker.DoWork += new DoWorkEventHandler((e, s) =>
+            {
+                DoWorkSearchUser(SearchBoxTextUser);
+            });
+            _searchPatientWorker.DoWork += new DoWorkEventHandler((e, s) =>
+            {
+                DoWorkSearchPatient(SearchBoxTextPatient);
+            });
         }
 
         #region Variables
+        private ObservableCollection<User> FullListUser;
+        private ObservableCollection<Patient> FullListPatient;
+        private BackgroundWorker _searchUserWorker = new BackgroundWorker();
+        private BackgroundWorker _searchPatientWorker = new BackgroundWorker();
+        private string _searchBoxTextUser;
+        public string SearchBoxTextUser
+        {
+            get
+            {
+                return _searchBoxTextUser;
+            }
+            set
+            {
+                _searchBoxTextUser = value;
+                RaisePropertyChanged("SearchBoxTextUser");
+                _searchUserWorker.RunWorkerAsync();
+            }
+        }
+        private string _searchBoxTextPatient;
+        public string SearchBoxTextPatient
+        {
+            get
+            {
+                return _searchBoxTextPatient;
+            }
+            set
+            {
+                _searchBoxTextPatient = value;
+                RaisePropertyChanged("SearchBoxTextPatient");
+                _searchPatientWorker.RunWorkerAsync();
+            }
+        }
         #region Chart
         public Func<double, string> YFormater { get; set; }
         public SeriesCollection SeriesCollectionTemp { get; set; }
@@ -273,6 +317,8 @@ namespace virsol_tMedicalDotNet.ViewModel
         }
         #endregion
         #region Commands
+        public ICommand RefreshUserList { get; set; }
+        public ICommand RefreshPatientList { get; set; }
         public ICommand DeleteUserCommand { get; set; }
         public ICommand NewUserCommand { get; set; }
         public ICommand NewObsCommand { get; set; }
@@ -425,6 +471,50 @@ namespace virsol_tMedicalDotNet.ViewModel
             ChartLabelsTemp.Clear();
             SeriesCollectionHeart.First().Values.Clear();
             SeriesCollectionTemp.First().Values.Clear();
+        }
+
+        private void DoWorkSearchUser(string text)
+        {
+            if (text.Equals(""))
+            {
+                ListUsers = FullListUser;
+                return;
+            }
+            ObservableCollection<Model.User> users = new ObservableCollection<User>();
+            foreach (var user in FullListUser)
+            {
+                if (user.name.ToLower().Contains(text.ToLower()) || (user.firstname.ToLower().Contains(text.ToLower())))
+                    users.Add(user);
+            }
+            if (users.Count > 0)
+                SelectedUser = users.First();
+            ListUsers = users;
+        }
+        private void DoWorkSearchPatient(string text)
+        {
+            if (text.Equals(""))
+            {
+                PatientList = FullListPatient;
+                return;
+            }
+            ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
+            foreach (var patient in FullListPatient)
+            {
+                if (patient.name.ToLower().Contains(text.ToLower()) || (patient.firstname.ToLower().Contains(text.ToLower())))
+                    patients.Add(patient);
+            }
+            if (patients.Count > 0)
+                SelectedPatient = patients.First();
+            PatientList = patients;
+        }
+        private void RefreshUserListMethod()
+        {
+            _worker.RunWorkerAsync();
+        }
+
+        private void RefreshPatientListMethod()
+        {
+            _workerPatients.RunWorkerAsync();
         }
 
         #endregion

@@ -50,6 +50,11 @@ namespace virsol_tMedicalDotNet.ViewModel
 
         private void CreateUserMethod(PasswordBox passwordBox)
         {
+            if (Login == null || Login.Equals("") || passwordBox.Password.Equals(""))
+            {
+                MaterialMessageBox.ShowError("Champs login et password obligatoires !");
+                return;
+            }
             Model.User newUser = new Model.User()
             {
                 login = Login,
@@ -69,7 +74,7 @@ namespace virsol_tMedicalDotNet.ViewModel
             }
             else
             {
-                MaterialMessageBox.ShowError("Impossible de créer un nouvel utilisateur !");
+                MaterialMessageBox.ShowError("Impossible de créer un nouvel utilisateur (Essayer de choisir image plus petite)!");
             }
         }
 
@@ -84,7 +89,8 @@ namespace virsol_tMedicalDotNet.ViewModel
             {
                 MemoryStream memStream = new MemoryStream();
                 JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(new BitmapImage(new Uri(op.FileName))));
+                BitmapImage bitmapImage = new BitmapImage(new Uri(op.FileName));
+                encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
                 encoder.Save(memStream);
                 Picture = memStream.ToArray();
             }

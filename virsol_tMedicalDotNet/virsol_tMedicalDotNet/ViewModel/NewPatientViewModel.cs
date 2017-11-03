@@ -43,6 +43,11 @@ namespace virsol_tMedicalDotNet.ViewModel
         #region Methods
         private void CreatePatientMethod()
         {
+            if (Firstname == null || Firstname.Equals("") || Name == null ||Name.Equals(""))
+            {
+                MaterialMessageBox.ShowError("Le patient doit avoir un nom/prénom !");
+                return;
+            }
             Model.Patient patient = new Model.Patient()
             {
                 birthday = Birthdate,

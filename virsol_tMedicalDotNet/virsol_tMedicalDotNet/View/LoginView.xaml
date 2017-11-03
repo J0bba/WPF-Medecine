@@ -68,7 +68,7 @@
                 <TextBox Text="{Binding Path=Login,UpdateSourceTrigger=Default, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" Width="120" Height="Auto" Margin="168,100,168.8,0"/>
                 <Label Content="Password" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="165"/>
                 <PasswordBox Name="MyPasswordBox" HorizontalContentAlignment="Center" Height="Auto" Margin="169,195,168.8,195.2"/>
-                <Button Content="Connect" Margin="318,322,30.8,61.2" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=MyPasswordBox}"/>
+                <Button IsDefault="True" Content="Connect" Margin="318,322,30.8,61.2" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=MyPasswordBox}"/>
             </Grid>
         </materialDesign:Card>
     </Grid>

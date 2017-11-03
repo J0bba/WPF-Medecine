@@ -34,11 +34,24 @@
                         <ColumnDefinition Width="Auto" MaxWidth="150" MinWidth="50"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox Grid.Row="0" Grid.Column ="0" Background="#EFEBE9" Width="Auto" MaxWidth="150" MinWidth="50" HorizontalAlignment="Left" 
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.2*"/>
+                            <RowDefinition Height="29*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox  Padding="2, 0, 0, 0" Height="Auto" Grid.Row="0"
+                                         Text="{Binding SearchBoxTextUser, UpdateSourceTrigger=PropertyChanged}"
+                             Width="{Binding ElementName=ListBox, Path=Width}" 
+                             Margin="0"/>
+                        <ListBox x:Name="ListBox" Grid.Row="1" Background="#EFEBE9" Width="Auto" MaxWidth="150" MinWidth="100" HorizontalAlignment="Left" 
                              ItemsSource="{Binding Path=ListUsers}" 
                              SelectedItem="{Binding Path=SelectedUser, Mode=TwoWay}"
                              DisplayMemberPath="prettyname"
                              SelectedIndex="0"/>
+                        <Button Grid.Row="3" Width="{Binding ElementName=ListBox, Path=Width}" Height="Auto" Content="Rafraichir" Command="{Binding RefreshUserList}"/>
+                    </Grid>
                     <materialDesign:Card  Margin="0,10,0,0" Height="Auto" Padding="0,25,0,50" Grid.Row="0" Grid.Column="1">
                         <Grid>
                             <Label Content="Name :" HorizontalAlignment="Left" Margin="153,24,0,0" VerticalAlignment="Top"/>
@@ -67,11 +80,29 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox Grid.Row="0"  Background="#EFEBE9" Grid.Column ="0" Width="Auto" MaxWidth="150" MinWidth="50" HorizontalAlignment="Left" 
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.2*"/>
+                            <RowDefinition Height="29*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox  Padding="2, 0, 0, 0" Height="Auto" Grid.Row="0" 
+                                         Text="{Binding SearchBoxTextPatient, UpdateSourceTrigger=PropertyChanged}"
+                             Width="{Binding ElementName=ListBoxPatient, Path=Width}" 
+                             Margin="0"/>
+                        <ListBox x:Name="ListBoxPatient" Grid.Row="1" Background="#EFEBE9" Width="Auto" MaxWidth="150" MinWidth="100" HorizontalAlignment="Left" 
                              ItemsSource="{Binding Path=PatientList}" 
                              SelectedItem="{Binding Path=SelectedPatient, Mode=TwoWay}"
                              DisplayMemberPath="prettyname"
                              SelectedIndex="0"/>
+                        <Button Grid.Row="3" Width="{Binding ElementName=ListBoxPatient, Path=Width}" Height="Auto" Content="Rafraichir" Command="{Binding RefreshPatientList}"/>
+                    </Grid>
+                    <!--<ListBox Grid.Row="0"  Background="#EFEBE9" Grid.Column ="0" Width="Auto" MaxWidth="150" MinWidth="50" HorizontalAlignment="Left" 
+                             ItemsSource="{Binding Path=PatientList}" 
+                             SelectedItem="{Binding Path=SelectedPatient, Mode=TwoWay}"
+                             DisplayMemberPath="prettyname"
+                             SelectedIndex="0"/>-->
                     <ListBox Grid.Column="1" Background="#EFEBE9" HorizontalAlignment="Left" Height="Auto" MinHeight="20" Margin="50,64,0,0" VerticalAlignment="Top" MinWidth="110" Width="Auto" MaxWidth="110" MaxHeight="506"
                              ItemsSource="{Binding SelectedPatient.observations}"
                              SelectedItem="{Binding SelectedObservation}"

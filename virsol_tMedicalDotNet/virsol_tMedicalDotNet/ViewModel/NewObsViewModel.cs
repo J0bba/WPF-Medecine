@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using BespokeFusion;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
@@ -102,6 +103,11 @@ namespace virsol_tMedicalDotNet.ViewModel
 
         private void CreateObsMethod()
         {
+            if (Prescriptions == null || Prescriptions.Equals("") || BloodPressure.Equals("0") || Weight.Equals("0"))
+            {
+                MaterialMessageBox.ShowError("Remplir les champs obligatoire de l'observation (poids, pression sanguine, prescription");
+                return;
+            }
             Model.Observation obs = new Model.Observation()
             {
                 bloodPressure = _bloodPressure,

@@ -31,7 +31,7 @@
         <Label Content="Picture : " HorizontalAlignment="Left" Margin="178,347,0,0" VerticalAlignment="Top"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="266,347,0,0" VerticalAlignment="Top" Width="100" Source="{Binding Picture}"/>
         <Button Content="Charger une image" HorizontalAlignment="Left" Margin="419,392,0,0" VerticalAlignment="Top" Width="Auto" Command="{Binding AddImageCommand}"/>
-        <Button Content="Valider" HorizontalAlignment="Left" Margin="691,0,0,18.4" VerticalAlignment="Bottom" Width="Auto" Command="{Binding CreateUserCommand}" CommandParameter="{Binding ElementName=PasswordBox}"/>
+        <Button IsDefault="True" Content="Valider" HorizontalAlignment="Left" Margin="691,0,0,18.4" VerticalAlignment="Bottom" Width="Auto" Command="{Binding CreateUserCommand}" CommandParameter="{Binding ElementName=PasswordBox}"/>
         <Button Content="Annuler" HorizontalAlignment="Left" Margin="597,0,0,18.4" VerticalAlignment="Bottom" Width="Auto" Command="{Binding CancelCommand}"/>
         <Label Content="Utilisateur : " HorizontalAlignment="Left" Margin="356,37,0,0" VerticalAlignment="Top"/>
 
