@@ -19,14 +19,17 @@ namespace virsol_tMedicalDotNet.Services
             bool result = false;
             try
             {
-                ServicePatient.Patient patientS = new ServicePatient.Patient()
+                for (int i = 0; i < 5000; i++)
                 {
-                    Birthday = patient.birthday,
-                    Firstname = patient.firstname,
-                    Name = patient.name,
-                    Observations = null
-                };
-                result = servicePatient.AddPatient(patientS);
+                    ServicePatient.Patient patientS = new ServicePatient.Patient()
+                    {
+                        Birthday = patient.birthday,
+                        Firstname = patient.firstname,
+                        Name = patient.name,
+                        Observations = null
+                    };
+                    result = servicePatient.AddPatient(patientS);
+                }
             }
             catch (Exception) { }
             finally { servicePatient.Close(); }

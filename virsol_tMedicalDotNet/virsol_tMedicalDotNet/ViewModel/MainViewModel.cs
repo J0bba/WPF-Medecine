@@ -483,7 +483,7 @@ namespace virsol_tMedicalDotNet.ViewModel
             ObservableCollection<Model.User> users = new ObservableCollection<User>();
             foreach (var user in FullListUser)
             {
-                if (user.name.ToLower().Contains(text.ToLower()) || (user.firstname.ToLower().Contains(text.ToLower())))
+                if (user.prettyname.ToLower().Contains(text.ToLower()))
                     users.Add(user);
             }
             if (users.Count > 0)
@@ -500,7 +500,7 @@ namespace virsol_tMedicalDotNet.ViewModel
             ObservableCollection<Patient> patients = new ObservableCollection<Patient>();
             foreach (var patient in FullListPatient)
             {
-                if (patient.name.ToLower().Contains(text.ToLower()) || (patient.firstname.ToLower().Contains(text.ToLower())))
+                if (patient.prettyname.ToLower().Contains(text.ToLower()))
                     patients.Add(patient);
             }
             if (patients.Count > 0)

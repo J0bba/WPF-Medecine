@@ -36,7 +36,7 @@ namespace virsol_tMedicalDotNet.Services
                 {
                     ViewModel.ChartLabelsHeart.Add(curr.ToLongTimeString());
                     ViewModel.SeriesCollectionHeart.First().Values.Add(double.NaN);
-                    curr = curr.AddSeconds(1/5);
+                    curr = curr.AddSeconds(0.2);
                 }
             }
             ViewModel.SeriesCollectionHeart.First().Values.RemoveAt(j);

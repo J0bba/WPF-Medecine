@@ -172,7 +172,7 @@
                     <!--<xctk:Chart Grid.Row="0">
                         <xctk:LineSeries ItemsSource="{Binding Path=ChartDataHeart}" IndependentValueBinding="{Binding Name}" DependentValueBinding="{Binding Value}"/>
                     </xctk:Chart>-->
-                    <lvc:CartesianChart Margin="0,50,0,0" Hoverable="False" Grid.Row="0" Series="{Binding SeriesCollectionHeart}" LegendLocation="Right" >
+                    <lvc:CartesianChart Margin="0,50,0,0" Hoverable="False" DataTooltip="{x:Null}" Grid.Row="0" Series="{Binding SeriesCollectionHeart}" LegendLocation="Right" >
                         <lvc:CartesianChart.AxisY>
                             <lvc:Axis Title="Valeur" LabelFormatter="{Binding YFormater}"></lvc:Axis>
                         </lvc:CartesianChart.AxisY>
