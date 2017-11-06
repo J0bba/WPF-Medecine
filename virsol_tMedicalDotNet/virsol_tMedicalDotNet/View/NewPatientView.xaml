@@ -19,9 +19,9 @@
     </Window.Resources>
     <Grid>
         <Label Content="Name :" HorizontalAlignment="Left" Margin="180,81,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="268,84,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="268,84,0,0" TextWrapping="Wrap" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <Label Content="Firstname :" HorizontalAlignment="Left" Margin="180,122,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="268,126,0,0" TextWrapping="Wrap" Text="{Binding Firstname}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="268,126,0,0" TextWrapping="Wrap" Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <Label Content="Birthdate :" HorizontalAlignment="Left" Margin="180,166,0,0" VerticalAlignment="Top"/>
         <DatePicker HorizontalAlignment="Left" Margin="267,168,0,0" VerticalAlignment="Top" SelectedDate="{Binding Birthdate}"/>
         <Button IsDefault="True" Content="Valider" HorizontalAlignment="Left" Margin="488,291,0,0" VerticalAlignment="Top" Width="Auto" Command="{Binding CreatePatientCommand}"/>

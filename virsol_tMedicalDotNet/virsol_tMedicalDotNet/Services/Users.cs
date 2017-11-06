@@ -17,18 +17,15 @@ namespace virsol_tMedicalDotNet.Services
             bool result = false;
             try
             {
-                for (int i = 0; i < 200; i++)
+                result = serviceUser.AddUser(new ServiceUser.User()
                 {
-                    result = serviceUser.AddUser(new ServiceUser.User()
-                    {
-                        Login = user.login + i.ToString(),
-                        Pwd = user.pwd,
-                        Name = user.name,
-                        Firstname = user.firstname,
-                        Picture = user.picture,
-                        Role = user.role
-                    });
-                }
+                    Login = user.login + i.ToString(),
+                    Pwd = user.pwd,
+                    Name = user.name,
+                    Firstname = user.firstname,
+                    Picture = user.picture,
+                    Role = user.role
+                });
             }
             catch (Exception) { }
             finally { serviceUser.Close(); }
